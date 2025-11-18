@@ -3,12 +3,12 @@ import { getAuth, setPersistence, inMemoryPersistence } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDpd6-UqtYsa-HeTnA1tgw833Fxd5Bsacw",
-  authDomain: "lilac-bloom.firebaseapp.com",
-  projectId: "lilac-bloom",
-  storageBucket: "lilac-bloom.firebasestorage.app",
-  messagingSenderId: "360441557357",
-  appId: "1:360441557357:web:2935de2d2914ca5ccf2a64",
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
