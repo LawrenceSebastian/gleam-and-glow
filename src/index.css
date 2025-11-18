@@ -1,0 +1,233 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   SNOOPY FLY ACROSS TOP
+   ============================================================ */
+@keyframes snoopyFly {
+  0%   { transform: translateX(0) scaleX(1); }
+  49.9% { transform: translateX(calc(100vw - 64px)) scaleX(1); }
+  50%  { transform: translateX(calc(100vw - 64px)) scaleX(-1); }
+  99.9% { transform: translateX(0) scaleX(-1); }
+  100% { transform: translateX(0) scaleX(1); }
+}
+
+.snoopy-fly {
+  position: fixed;
+  top: 40px;
+  left: 0;
+  width: 48px;
+  animation: snoopyFly 30s linear infinite;
+  image-rendering: pixelated;
+  z-index: 1;
+}
+
+/* ============================================================
+   WALKING CHARACTERS + PAUSE
+   ============================================================ */
+/* === Constant speed + 2s pause + instant flip === */
+/* Total loop: 18s → 8s walk in, 2s pause, 8s walk back
+   8/18 ≈ 44.44%  •  pause window: 44.44% → 55.56%  */
+
+@keyframes walkMe {
+  0%      { transform: translateX(0) scaleX(-1); }                        /* start right, face left */
+  44.44%  { transform: translateX(calc(-50vw + 64px)) scaleX(-1); }       /* arrive center */
+  55.55%  { transform: translateX(calc(-50vw + 64px)) scaleX(-1); }       /* hold (no movement) */
+  55.56%  { transform: translateX(calc(-50vw + 64px)) scaleX(1); }        /* instant flip */
+  100%    { transform: translateX(0) scaleX(1); }                         /* walk back */
+}
+
+@keyframes walkHer {
+  0%      { transform: translateX(0) scaleX(1); }                         /* start left, face right */
+  44.44%  { transform: translateX(calc(50vw - 64px)) scaleX(1); }         /* arrive center */
+  55.55%  { transform: translateX(calc(50vw - 64px)) scaleX(1); }         /* hold (no movement) */
+  55.56%  { transform: translateX(calc(50vw - 64px)) scaleX(-1); }        /* instant flip */
+  100%    { transform: translateX(0) scaleX(-1); }                        /* walk back */
+}
+
+/* Hug the bottom for all screens */
+.character {
+  position: fixed;
+  bottom: 0;        
+  width: 64px;
+  height: auto;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  transform-origin: center;
+  z-index: 50;
+}
+
+.character-wrapper {
+  position: fixed;
+  bottom: 0;            /* flush with screen bottom */
+  width: 64px;          /* match your sprite width */
+  height: auto;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  transform-origin: center;
+  z-index: 50;
+}
+
+.sprite {
+  width: 64px;
+  height: auto;
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  transition: opacity 0.00s linear;
+}
+
+/* keep pixel art crisp */
+.pixelated {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  image-rendering: -moz-crisp-edges;
+}
+
+/* ============================================================
+   HEART FLOAT
+   ============================================================ */
+@keyframes heartFloat {
+  0%   { transform: translateY(0) scale(1); }
+  50%  { transform: translateY(-8px) scale(1.2); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+.heart-pop {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  z-index: 30;
+  image-rendering: pixelated;
+}
+
+/* ============================================================
+   FLOWER (BLENDS INTO GROUND)
+   ============================================================ */
+.flower-fixed {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1; /* Behind characters */
+}
+
+.flower-img {
+  width: 88px;
+  image-rendering: pixelated;
+}
+
+/* ============================================================
+   CLOUD SYSTEM — EVENLY SPACED
+   ============================================================ */
+@keyframes cloudLoop {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(160vw); }
+}
+
+.cloud {
+  width: 128px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  will-change: transform;
+  z-index: 51; 
+}
+
+@keyframes twinkle {
+  0%   { opacity: 0.8; transform: scale(0.7); }
+  50%  { opacity: 1; transform: scale(1.5); }
+  100% { opacity: 0.8; transform: scale(0.7); }
+}
+
+
+/* ============================================================
+    SHOOTING STARS
+   ============================================================ */
+
+   @keyframes shootingStar {
+  0% {
+    transform: translate(-20vw, -10vh) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(120vw, 40vh) scale(0.8);
+    opacity: 0;
+  }
+}
+
+.shooting-star {
+  position: fixed;
+  top: 10vh;              /* starting vertical position */
+  left: -20vw;            /* start offscreen to the left */
+  width: 4px;
+  height: 4px;
+  background: white;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+  z-index: 60;
+}
+
+.shooting-star::after {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0)
+  );
+}
+
+.font-8bit {
+  font-family: "Press Start 2P", cursive;
+  image-rendering: pixelated;
+}
+
+
+/* Lantern smooth diagonal float */
+@keyframes lanternFloat {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(160vw, -160vh) scale(0.9);
+  }
+}
+
+/* Soft lantern glow halo */
+.lantern {
+  position: absolute;
+  will-change: transform;
+  image-rendering: pixelated;
+}
+
+.lantern::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70%;
+  height: 70%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 200, 120, 0.9) 10%,
+    rgba(255, 160, 80, 0.4) 20%,
+    rgba(255, 140, 60, 0.0) 50%
+  );
+  filter: blur(1px);
+}
+
+
