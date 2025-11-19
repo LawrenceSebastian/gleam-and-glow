@@ -27,11 +27,15 @@ import ShootingStar from "./ShootingStar";
 import CloudLayer from "./CloudLayer";
 import UiFrame from "../assets/ui/bloomGUI.png";
 import LanternFestival from "./LanternFestival";
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+
 
 const MAX_DAYS = 30;
 const ALLOWED_WRITERS = new Set(["lsadhinatha@gmail.com"]);
 
 export default function BloomPanel() {
+  const navigate = useNavigate();
   const [bloom, setBloom] = useState(null);
   const [loading, setLoading] = useState(true);
   const [note, setNote] = useState("");
@@ -175,7 +179,7 @@ export default function BloomPanel() {
             backgroundRepeat: "no-repeat",
             imageRendering: "pixelated",
 
-            paddingTop: "320px",
+            paddingTop: "350px",
             paddingLeft: "170px",
             paddingRight: "170px",
             paddingBottom: "160px",
@@ -185,6 +189,17 @@ export default function BloomPanel() {
             gap: "5px",
           }}
         >
+          <button
+            onClick={async () => {
+              await signOut(auth);
+              navigate("/");
+            }}
+            className="text-xs text-purple-700 underline font-8bit mb-2"
+            style={{ imageRendering: "pixelated" }}
+          >
+            RETURN TO MAIN MENU
+          </button>
+
           {/* Flower */}
           <Flower progress={bloom?.progress} />
 
