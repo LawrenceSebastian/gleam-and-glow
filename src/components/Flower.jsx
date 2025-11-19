@@ -8,7 +8,7 @@ import { todayKeyJKT } from "../lib/bloom";
 const stages = [stage1, stage2, stage3, stage4, stage5];
 
 // 🎂 Your override date
-const SPECIAL_BLOOM_DAY = "2025-11-18";
+const SPECIAL_BLOOM_DAY = "2025-11-19";
 
 /** 
  * Compute the actual bloom stage index,
