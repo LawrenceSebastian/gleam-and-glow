@@ -243,7 +243,12 @@ export default function BloomPanel() {
               style={{ imageRendering: "pixelated" }}
             >
               <p className="text-black">My Dearest Audrey,</p>
-              <p className="mt-1 text-black">{latestEntry.text}</p>
+              <p
+              className="mt-1 text-black"
+              style={{ whiteSpace: "pre-wrap" }}
+            >
+              {latestEntry.text}
+            </p>
             </div>
           )}
 

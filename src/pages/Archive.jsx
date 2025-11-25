@@ -4,6 +4,18 @@ import { db } from "../lib/firebase";
 import { Link } from "react-router-dom";
 import PixelPanel from "../components/PixelPanel";
 
+function formatDate(ts) {
+  if (!ts) return "";
+  const date = ts.toDate();
+
+  return date.toLocaleDateString("en-US", {
+    timeZone: "Asia/Jakarta",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+
 export default function Archive() {
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -22,7 +34,7 @@ export default function Archive() {
   }, []);
 
   if (loading)
-    return <p className="text-center text-slate-500 mt-10">Loading archive...</p>;
+    return <p className="text-center text-slate-500 mt-10">i ❤️ audrey !</p>;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-purple-200 to-purple-100">
@@ -37,9 +49,14 @@ export default function Archive() {
               <div
                 key={i}
                 className="bg-white border border-black p-2 text-xs font-8bit"
+                style={{ whiteSpace: "pre-wrap"}}
               >
-                <p className="text-black">My Dearest Audrey,</p>
-                <p className="mt-1 text-black">{e.text}</p>
+                {/* Date stamp */}
+                <p className="text-[10px] text-slate-600">
+                  {formatDate(e.createdAt)}
+                </p>
+                <p className="mt-3 text-black">My Dearest Audrey,</p>
+                <p className="mt-3 text-black">{e.text}</p>
               </div>
             ))
           )}
