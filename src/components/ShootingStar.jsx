@@ -40,8 +40,8 @@ export default function ShootingStar() {
       const h = jkt.getHours();
       const m = jkt.getMinutes();
 
-      if (h === 5 && m === 51) {  // 11:11 PM Jakarta
-        const key = jkt.toDateString() + "-05:51";
+      if (h === 5 && m === 53) {  // 11:11 PM Jakarta
+        const key = jkt.toDateString() + "-05:53";
         if (lastTriggerRef.current !== key) {
           lastTriggerRef.current = key;
           triggerShower();
