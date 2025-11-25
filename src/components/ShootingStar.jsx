@@ -37,8 +37,8 @@ export default function ShootingStar() {
       const m = jkt.getMinutes();
 
       // main trigger: 23:11 JKT
-      if (h === 23 && m === 11) {
-        const key = jkt.toDateString() + "-23:11";
+      if (h === 6 && m === 4) {
+        const key = jkt.toDateString() + "-06:04";
 
         if (lastTriggerRef.current !== key) {
           lastTriggerRef.current = key;
