@@ -38,7 +38,8 @@ export default function Archive() {
                 key={i}
                 className="bg-white border border-black p-2 text-xs font-8bit"
               >
-                {e.text}
+                <p className="text-black">My Dearest Audrey,</p>
+                <p className="mt-1 text-black">{e.text}</p>
               </div>
             ))
           )}
