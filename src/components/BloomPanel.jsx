@@ -244,7 +244,7 @@ export default function BloomPanel() {
             >
               <p className="text-black">My Dearest Audrey,</p>
               <p
-              className="mt-1 text-black"
+              className="mt-3 text-black"
               style={{ whiteSpace: "pre-wrap" }}
             >
               {latestEntry.text}
