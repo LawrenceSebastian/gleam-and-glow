@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./lib/firebase";
@@ -23,34 +23,46 @@ export default function App() {
   }, []);
 
   if (loading) {
-    return <p className="text-center text-slate-500 mt-10">Loading...</p>;
+    return <p className="text-center text-slate-500 mt-10">i ❤️ audrey !</p>;
   }
 
   return (
-    <BrowserRouter>
-      <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden">
 
-        {/* BACKGROUND LAYERS */}
-        <CloudLayer />     {/* sky objects in the back (z-0) */}
+      {/* BACKGROUND LAYERS */}
+      <CloudLayer />
+      <WalkingPair />
 
-        <WalkingPair />    {/* characters near bottom */}
+      {/* ROUTES */}
+      <Routes>
 
-        {/* ROUTES */}
-        <Routes>
-          {!user && <Route path="/" element={<AuthPanel />} />}
+        {/* Public route */}
+        <Route
+          path="/"
+          element={
+            user ? <Navigate to="/bloom" replace /> : <AuthPanel />
+          }
+        />
 
-          {user && (
-            <>
-              <Route path="/bloom" element={<BloomPanel />} />
-              <Route path="/archive" element={<Archive />} />
-              <Route path="*" element={<Navigate to="/bloom" replace />} />
-            </>
-          )}
+        {/* Protected routes */}
+        <Route
+          path="/bloom"
+          element={
+            user ? <BloomPanel /> : <Navigate to="/" replace />
+          }
+        />
 
-          {!user && <Route path="*" element={<Navigate to="/" replace />} />}
-        </Routes>
+        <Route
+          path="/archive"
+          element={
+            user ? <Archive /> : <Navigate to="/" replace />
+          }
+        />
 
-      </div>
-    </BrowserRouter>
+        {/* Catch-all fallback */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+
+    </div>
   );
 }
