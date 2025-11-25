@@ -163,7 +163,7 @@
 
 .shooting-star {
   position: fixed;
-  top: 10vh;              /* starting vertical position */
+  top: 0vh;              /* starting vertical position */
   left: -20vw;            /* start offscreen to the left */
   width: 4px;
   height: 4px;
